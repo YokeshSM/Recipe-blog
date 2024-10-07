@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
-
+import { MdCancel } from "react-icons/md";
 const Home = () => {
   const recipes = [
     {
@@ -84,6 +84,10 @@ const Home = () => {
     slidesToScroll: 1,
   };
 
+   const [visible,setvisible]=useState(false)
+   const handleOpen = () => {
+     setvisible(true)
+   }
   return (
     <div className="bg-gray-300  min-h-screen">
       {/* Header */}
@@ -113,16 +117,42 @@ const Home = () => {
                   />
                   <h3 className="text-lg font-semibold mt-2">{recipe.title}</h3>
                   <p className="text-gray-600 mt-1">{recipe.description}</p>
-                  <Link
-                    to={`/recipes/${recipe.id}`}
-                    className="mt-2 inline-block text-green-600 hover:underline"
+                  <button
+                      onClick={handleOpen}
+                    className="mt-2 inline-block text-green-600 "
                   >
                     View Recipe
-                  </Link>
+                  </button>
                 </div>
               ))}
             </Slider>
           </div>
+          {
+            visible && (
+              <div className="fixed top-0 left-0 w-full h-screen z-50 flex justify-center items-center">
+                <div className="p-6 w-full max-w-md bg-white">
+                
+                <div className="flex justify-between">
+                <h1 className="text-2xl font-bold">{recipes[0].title}</h1>
+                <MdCancel onClick={() => setvisible(false)}
+                  className="text-4xl text-red-500 hover:text-red-700"/>
+              </div>
+                  
+                  <img
+                    src={recipes[0].image}
+                    alt={recipes[0].title}
+                    className="w-full h-64 object-cover"
+                  />
+                  <p className="text-gray-600 mt-2">{recipes[0].description}</p>
+                  <button
+                    onClick={() => setvisible(false)}
+                    className="mt-2 inline-block text-green-600 "
+                  >
+                  </button>
+                   </div>
+                </div>
+            )
+          }
         </section>
 
         <h2 className="text-2xl font-semibold mb-4">Latest Recipes</h2>
@@ -140,17 +170,17 @@ const Home = () => {
               <div className="p-4">
                 <h3 className="text-lg font-semibold">{recipe.title}</h3>
                 <p className="text-gray-600 mt-2">{recipe.description}</p>
-                <Link
-                  to={`/recipes/${recipe.id}`}
-                  className="mt-4 inline-block text-green-600 hover:underline"
-                >
-                  View Recipe
-                </Link>
+                <button
+                      onClick={() => setvisible(true)}
+                    className="mt-2 inline-block text-green-600 "
+                  >
+                    View Recipe
+                  </button>
               </div>
             </div>
           ))}
         </div>
-
+       
         {/* Seasonal Recipes Section */}
         <section className="my-8">
           <h2 className="text-2xl font-semibold mb-4 text-center">
@@ -171,12 +201,11 @@ const Home = () => {
                   <div className="p-4">
                     <h3 className="text-lg font-semibold">{recipe.title}</h3>
                     <p className="text-gray-600 mt-2">{recipe.description}</p>
-                    <Link
-                      to={`/recipes/${recipe.id}`}
-                      className="mt-4 inline-block text-green-600 hover:underline"
-                    >
-                      View Recipe
-                    </Link>
+                    <button
+                    onClick={() => setvisible(false)}
+                    className="mt-2 inline-block text-green-600 "
+                  >
+                  </button>
                   </div>
                 </div>
               ))}
@@ -210,6 +239,7 @@ const Home = () => {
         {/* Carousel Section */}
       </main>
     </div>
+   
   );
 };
 
