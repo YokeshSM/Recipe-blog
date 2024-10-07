@@ -89,7 +89,7 @@ const Home = () => {
      setvisible(true)
    }
   return (
-    <div className="bg-gray-300  min-h-screen">
+    <div className="bg-gray-100  min-h-screen">
       {/* Header */}
       <header className="bg-green-800  text-white text-center p-6">
         <h1 className="text-4xl font-bold">Welcome to Ungal Unavu</h1>
