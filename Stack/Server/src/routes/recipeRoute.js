@@ -1,11 +1,13 @@
 import express from "express";
+import  recipe  from '../model/recipeModel.js'
+// const express=require("express")
 // import { listRecipes } from "../controller/recipeController.js";
 const recipeRouter = express.Router();
-const RecipieModel=require("../model/recipeModel")
+// const RecipieModel=require("../model/recipeModel")
 
 recipeRouter.get("/list", async(req,res)=>{
     try {
-        const fetchRecipie=await RecipieModel.find()
+        const fetchRecipie=await RecipeModel.find()
         res.status(200).json(fetchRecipie);
         
     } catch (error) {
@@ -46,7 +48,7 @@ recipeRouter.put("/edit/:id",async(req,res)=>{
         
     }
 })
-recipeRouter.delet("/delete/:id",async(req,res)=>{
+recipeRouter.delete("/delete/:id",async(req,res)=>{
     try {
         const recipieId=req.params.recipieId
         const currentRecipie=await RecipieModel.findOne({_id:recipieId})

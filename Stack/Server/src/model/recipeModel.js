@@ -9,6 +9,7 @@ const recipeSchema = new mongoose.Schema();
   servings: { type: String, required: true },
   like: { type: Number, required: true },
 });
-
-const recipeModel =
-  mongoose.model.recipe || mongoose.model("recipe", recipeSchema);
+ const recipe =
+  mongoose.model("recipe", recipeSchema);
+  export default recipe
+// export default {recipeModel}
