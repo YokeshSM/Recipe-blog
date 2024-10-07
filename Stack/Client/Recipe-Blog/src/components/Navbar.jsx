@@ -59,16 +59,7 @@ const CookingNavbar = () => {
               Home
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/about"
-              className={({ isActive }) =>
-                isActive ? 'text-white font-semibold' : 'text-green-200 hover:text-white transition duration-300'
-              }
-            >
-              About Us
-            </NavLink>
-          </li>
+          
           <li>
             <NavLink
               to="/recipes"
@@ -89,7 +80,36 @@ const CookingNavbar = () => {
               Blog
             </NavLink>
           </li>
-        
+          <li>
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                isActive ? 'text-white font-semibold' : 'text-green-200 hover:text-white transition duration-300'
+              }
+            >
+              About Us
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/signup"
+              className={({ isActive }) =>
+                isActive ? 'text-white font-semibold' : 'text-green-200 hover:text-white transition duration-300'
+              }
+            >
+              SignUp
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/signin"
+              className={({ isActive }) =>
+                isActive ? 'text-white font-semibold' : 'text-green-200 hover:text-white transition duration-300'
+              }
+            >
+              SignIn
+            </NavLink>
+          </li>
         </ul>
       </div>
     </nav>

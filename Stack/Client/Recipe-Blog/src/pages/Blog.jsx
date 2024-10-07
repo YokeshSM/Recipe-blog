@@ -1,5 +1,7 @@
 import React from 'react';
 import {Link} from 'react'
+
+const name="paveen";
 const blogPosts = [
   {
     title: "10 Easy Breakfast Recipes for Busy Mornings",
@@ -29,6 +31,7 @@ const blogPosts = [
 ];
 
 const BlogCard = ({ post }) => (
+  
   <div className="flex flex-col md:flex-row bg-white rounded-lg shadow-lg overflow-hidden mb-6 w-full">
     {/* Image */}
     <div className="md:w-1/3 w-full">
