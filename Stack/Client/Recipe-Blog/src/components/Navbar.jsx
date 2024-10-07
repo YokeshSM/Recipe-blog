@@ -45,7 +45,7 @@ const CookingNavbar = () => {
     <nav className="bg-green-600 shadow-md">
       <div className="container mx-auto flex justify-between items-center p-4">
         <NavLink to="/" className="text-white text-2xl font-bold">
-         Ungal Unavu
+         Ungal Unavu...
         </NavLink>
         
         <ul className="flex space-x-6">
