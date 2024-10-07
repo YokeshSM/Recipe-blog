@@ -5,30 +5,38 @@ import { Pencil } from 'lucide-react'
 import { CirclePlus } from 'lucide-react';
 
 // RecipeCard Component
+
+
 const RecipeCard = ({ recipe }) => {
   const [likes, setLikes] = useState(0); // State to track number of likes
 
   // Handle like button click
   const handleLike = () => {
-    setLikes(likes + 1); // Increment like count
+    setLikes(recipe.like + 1); // Increment like count
   };
 
   return (
-    <div className="flex flex-col max-w-full rounded overflow-hidden shadow-lg p-4 m-4 bg-white">
-      <img
-        className="w-full h-48 object-cover rounded-lg mb-4"
-        src={recipe.image}
-        alt={recipe.name}
-      />
-      <div className="flex flex-col justify-between">
+    <div className="flex flex-row max-w-full w-full md:w-96 h-auto rounded-lg overflow-hidden shadow-lg p-4 m-4 bg-white">
+      {/* Image section */}
+      <div className="w-1/3 h-48"> {/* Set fixed height for rectangular shape */}
+        <img
+          className="w-full h-full object-cover rounded-lg"
+          src={recipe.image}
+          alt={recipe.name}
+        />
+      </div>
+
+      {/* Content section */}
+      <div className="flex flex-col justify-between w-2/3 pl-4">
         <h2 className="text-xl font-bold mb-2 text-gray-800">{recipe.name}</h2>
         <p className="text-gray-600 text-sm">Prep Time: {recipe.prepTime}</p>
         <p className="text-gray-600 text-sm mb-4">Servings: {recipe.servings}</p>
 
         <h4 className="text-md font-semibold text-gray-600">Ingredients:</h4>
-        <ul className="list-disc list-inside text-gray-700 mb-4">
+        {/* Horizontal ingredient list */}
+        <ul className="flex flex-wrap space-x-2 text-gray-700 mb-4">
           {recipe.ingredients.map((ingredient, index) => (
-            <li key={index}>{ingredient}</li>
+            <li key={index} className="whitespace-nowrap">{ingredient}</li>
           ))}
         </ul>
 
@@ -36,6 +44,7 @@ const RecipeCard = ({ recipe }) => {
         <p className="text-gray-700">{recipe.method}</p>
 
         {/* Like button */}
+        <div className="flex justify-between">
         <div className="flex items-center mt-4">
           <button
             onClick={handleLike}
@@ -45,14 +54,21 @@ const RecipeCard = ({ recipe }) => {
             <span className="text-gray-700">{recipe.like}</span>
           </button>
         </div>
-        <div className="flex items-center mt-4" ><button><Pencil />
-        <span>Edit</span>
-        </button></div>
-        
+
+
+        {/* Edit button */}
+        <div className="flex items-center mt-4">
+          <button className="flex items-center focus:outline-none">
+            <Pencil className="text-gray-600 w-4 h-4 mr-2" />
+            <span className="text-gray-700">Edit</span>
+          </button>
+        </div>
+        </div>
       </div>
     </div>
   );
 };
+
 
 // RecipePage Component
 const RecipePage = () => {
@@ -90,8 +106,8 @@ const RecipePage = () => {
           className="w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-gray-200"
         />
       </div>
-      <div className="w-full flex justify-end">
-      <button className="p-3 bg-blue-700 flex justify-end text-white">Add More Recipes< CirclePlus className="p-1" /></button>
+      <div className="w-full  flex justify-end">
+      <button className="p-3 rounded-md  bg-blue-700 flex justify-end text-white">< CirclePlus className="p-1 size-8" /></button>
       </div>
       {/* Recipe Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

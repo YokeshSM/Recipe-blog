@@ -34,6 +34,7 @@ const SignUp = () => {
               type="text"
               name="name"
               id="name"
+              placeholder="Enter Name"
               value={formData.name}
               onChange={handleChange}
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -47,6 +48,7 @@ const SignUp = () => {
             <input
               type="email"
               name="email"
+              placeholder="Enter Email"
               id="email"
               value={formData.email}
               onChange={handleChange}
@@ -61,6 +63,7 @@ const SignUp = () => {
             <input
               type="password"
               name="password"
+              placeholder="Enter Password"
               id="password"
               value={formData.password}
               onChange={handleChange}
