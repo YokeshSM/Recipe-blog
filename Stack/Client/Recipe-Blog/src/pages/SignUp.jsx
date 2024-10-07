@@ -13,11 +13,13 @@ const SignUp = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
-    axios.post();
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    axios.post("http://localhost:4000/", {
+      formData,
+    });
     console.log("Form submitted:", formData);
   };
 
