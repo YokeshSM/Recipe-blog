@@ -1,12 +1,16 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleChange = (e) => {
     setFormData({
@@ -15,12 +19,34 @@ const SignUp = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios.post("http://localhost:4000/", {
-      formData,
-    });
-    console.log("Form submitted:", formData);
+
+    try {
+      // Send the signup request
+      const response = await axios.post(
+        "http://localhost:4000/auth/signup",
+        formData
+      );
+      console.log("---------------------------------------------");
+      console.log(response.data); // Log the response data
+      console.log("---------------------------------------------");
+
+      toast.success("Successfully submitted"); // Notify success
+      console.log("Form submitted:", formData);
+
+      // Navigate to the main page after successful signup
+      navigate("/"); // Change "/" to your desired route
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error("Failed to submit"); // Notify failure
+      if (error.response) {
+        // If there's a response, show specific error message
+        console.error("Response error:", error.response.data);
+      } else {
+        console.error("Error message:", error.message);
+      }
+    }
   };
 
   return (
@@ -29,15 +55,15 @@ const SignUp = () => {
         <h2 className="text-2xl font-bold text-center mb-6">Sign Up</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="name" className="block text-gray-700">
+            <label htmlFor="username" className="block text-gray-700">
               Name
             </label>
             <input
               type="text"
-              name="name"
-              id="name"
+              name="username"
+              id="username"
               placeholder="Enter Name"
-              value={formData.name}
+              value={formData.username}
               onChange={handleChange}
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
               required
