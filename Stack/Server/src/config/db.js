@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
 
-dotenv.config(); // Load environment variables
+// dotenv.config(); // Load environment variables
 
 const connectDB = async () => {
     try {
-        console.log('MongoDB URI:', process.env.MONGODB_URI); // Debug line
+        // console.log('MongoDB URI:', process.env.MONGODB_URI); // Debug line
 
         mongoose.connection.on('connected', () => {
             console.log('DB connected');
@@ -20,14 +20,13 @@ const connectDB = async () => {
         });
 
         await mongoose.connect("mongodb+srv://raja:Abcd21@recipie.if1zd.mongodb.net/?retryWrites=true&w=majority&appName=Recipie", {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
+           
         });
 
         console.log('MongoDB connected successfully');
     } catch (error) {
         console.error('MongoDB connection error:', error);
-        process.exit(1); // Exit the process if connection fails
+        process.exit(1); 
     }
 };
 
