@@ -20,7 +20,17 @@ recipeRouter.post("/add", async (req, res) => {
     const addRecipe = new RecipeModel(req.body); // Corrected to RecipeModel
     const { name, image, ingredients, method, prepTime } = addRecipe;
 
-    if (!name || !image || !ingredients || !method || !prepTime) {
+    console.log(
+      "name: " +
+        name +
+        "  ingredients :" +
+        ingredients +
+        " method: " +
+        method +
+        "prepTime: " +
+        prepTime
+    );
+    if (!name || !ingredients || !method || !prepTime) {
       return res.status(400).json({ message: "All fields are required." });
     }
 

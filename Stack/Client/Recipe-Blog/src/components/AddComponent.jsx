@@ -1,60 +1,116 @@
-import React, { useState } from 'react'
-import { CirclePlus } from 'lucide-react';
+import React, { useState } from "react";
+import axios from "axios";
+import { CirclePlus } from "lucide-react";
 import { MdCancel } from "react-icons/md";
+
 const AddComponent = () => {
- 
-    const [visible,setvisible]=useState(false)
+  const [visible, setVisible] = useState(false);
+  const [recipe, setRecipe] = useState({
+    name: "",
+    preparationTime: "",
+    servings: "",
+    ingredients: "",
+    procedure: "",
+  });
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "ingredients") {
+      setRecipe({ ...recipe, [name]: value });
+    } else {
+      setRecipe({ ...recipe, [name]: value });
+    }
+  };
+
+  const handleAdd = async (e) => {
+    e.preventDefault();
+
+    // Split ingredients by commas and trim whitespace
+    const ingredientsList = recipe.ingredients
+      .split(",")
+      .map((ingredient) => ingredient.trim());
+
+    try {
+      const response = await axios.post("http://localhost:4000/recipe/add", {
+        ...recipe,
+        ingredients: ingredientsList,
+      });
+      console.log(response.data);
+
+      setRecipe({
+        name: "",
+        preparationTime: "",
+        servings: "",
+        ingredients: "",
+        procedure: "",
+      });
+      setVisible(false);
+    } catch (error) {
+      console.error("Error adding recipe:", error);
+      setErrorMessage("Failed to add the recipe. Please try again."); // Show error message
+    }
+  };
 
   return (
     <>
-    
-    <div>
-         <button className="p-3 rounded-md  bg-blue-700 flex justify-end text-white"  onClick={() => setvisible(true)} >
-        < CirclePlus className="p-1 size-8" />
+      <div className="flex justify-end mb-4">
+        <button
+          className="p-3 rounded-md bg-blue-600 flex text-white shadow-lg hover:bg-blue-700 transition duration-200"
+          onClick={() => setVisible(true)}
+        >
+          <CirclePlus className="p-1 size-8" />
         </button>
-    </div>
-    {
-        visible && (
-            <>
-            <div className="fixed top-0 left-0 w-full h-screen z-50 flex justify-center items-center backdrop-blur-sm">
-              <div className="p-6 w-full max-w-md bg-white rounded-lg border-black border-2 ">
-                <div className="flex justify-between">
-                  <h1 className="text-2xl font-bold">ADD YOUR RECIPE</h1>
-                  <MdCancel
-                    onClick={() => setvisible(false)}
-                    className="text-4xl text-red-500 hover:text-red-700"
-                  />
-                </div>
-                <form
-                > 
-                <div className='flex justify-center items-center  w-[100%]'> 
-                    <input type="text" placeholder='Recipe Name...' className='w-[100%] border-2 placeholder:text-zinc-500 rounded-lg my-2 border-black p-2'/>
-                </div>
-                <div className='flex justify-center items-center gap-8 w-[100%]'> 
-                    <input type="text" placeholder='Preparation Time...' className='w-[100%] border-2  placeholder:text-zinc-500 rounded-lg my-2 border-black p-2'/>
-                </div>
-                <div className='flex justify-center items-center gap-8 w-[100%] '> 
-                    <input type="text" placeholder='Servings...(eg=13)' className='w-[100%] border-2  placeholder:text-zinc-500 rounded-lg my-2 border-black p-2'/>
-                </div>
-                <div className='flex justify-center items-center gap-8 w-[100%]'> 
-                    <input type="text" placeholder='Incredients...(Split the input by commas)' className='w-[100%] border-2  placeholder:text-zinc-500 rounded-lg my-2 border-black p-2'/>
-                </div>
-                <div className='flex justify-center items-center gap-8 w-[100%]'> 
-                    <textarea name="" id="" placeholder="Recipe'S Procedure"  className='w-[100%] border-2  placeholder:text-zinc-500 rounded-lg my-2 border-black p-2  '></textarea>
-                </div>
-                <button 
-                type="submit"
-                className="mt-2 flex justify-center items-center w-[100%] bg-green-500 p-2 rounded-lg  text-2xl "
-                >ADD</button>
-                
-              </form>
-              </div>
+      </div>
+      {visible && (
+        <div className="fixed top-0 left-0 w-full h-screen z-50 flex justify-center items-center backdrop-blur-sm">
+          <div className="p-6 w-full max-w-md bg-white rounded-lg border border-gray-300 shadow-md">
+            <div className="flex justify-between mb-4">
+              <h1 className="text-2xl font-bold">Add Your Recipe</h1>
+              <MdCancel
+                onClick={() => setVisible(false)}
+                className="text-3xl text-red-500 hover:text-red-700 cursor-pointer"
+              />
             </div>
-            </>
-        )
-    }
+            {errorMessage && <p className="text-red-500">{errorMessage}</p>}{" "}
+            <form onSubmit={handleAdd}>
+              {Object.keys(recipe).map((key, index) => (
+                <div key={index} className="mb-4">
+                  {key !== "procedure" ? (
+                    <input
+                      type={key === "servings" ? "number" : "text"}
+                      name={key}
+                      value={recipe[key]}
+                      onChange={handleChange}
+                      placeholder={
+                        key.charAt(0).toUpperCase() + key.slice(1) + "..."
+                      }
+                      className="w-full border border-gray-300 rounded-lg p-2 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+                    />
+                  ) : (
+                    <textarea
+                      name={key}
+                      value={recipe[key]}
+                      onChange={handleChange}
+                      placeholder="Recipe's Procedure..."
+                      className="w-full border border-gray-300 rounded-lg p-2 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+                      rows={4}
+                    />
+                  )}
+                </div>
+              ))}
+              <button
+                type="submit"
+                className="w-full bg-green-600 p-2 rounded-lg text-white text-xl hover:bg-green-700 transition duration-200"
+              >
+                Add
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </>
-  )
-}
+  );
+};
 
-export default AddComponent
+export default AddComponent;
