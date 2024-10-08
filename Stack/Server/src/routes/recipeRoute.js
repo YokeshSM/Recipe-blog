@@ -14,19 +14,20 @@ recipeRouter.get("/list", async (req, res) => {
   }
 });
 
-// Adding a new recipe
 recipeRouter.post("/add", async (req, res) => {
   try {
-    const addRecipe = new RecipeModel(req.body); // Corrected to RecipeModel
+    const addRecipe = new RecipeModel(req.body); 
     const { name, image, ingredients, method, prepTime } = addRecipe;
 
     if (!name || !image || !ingredients || !method || !prepTime) {
+      console.log("all fields require")
       return res.status(400).json({ message: "All fields are required." });
     }
 
-    const saveRecipe = await addRecipe.save(); // Corrected to saveRecipe
+    const saveRecipe = await addRecipe.save();
     res.status(201).json(saveRecipe);
   } catch (error) {
+    console.log(error)
     res.status(500).json({
       message: "An error occurred while saving the recipe.",
       error: error.message,

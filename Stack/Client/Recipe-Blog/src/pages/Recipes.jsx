@@ -37,7 +37,6 @@ const RecipePage = () => {
 
   return (
     <div className="container mx-auto flex flex-col items-center justify-center min-h-screen p-4">
-      {/* Centered Search Bar */}
       <div className="w-full md:w-1/2 mb-6">
         <input
           type="text"
@@ -48,16 +47,14 @@ const RecipePage = () => {
         />
       </div>
       <div className="w-full  flex justify-end">
-      {/* <button className="p-3 rounded-md  bg-blue-700 flex justify-end text-white">
-        < CirclePlus className="p-1 size-8" />
-        </button> */}
-        <AddComponent />  {/* Add new recipe component */}
+      
+        <AddComponent fetchrecipes={{fetchrecipes}}/>  
       </div>
       {/* Recipe Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2   gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2   gap-6">       
         {filteredRecipes.length > 0 ? (
           filteredRecipes.map((recipe, index) => (
-            <RecipeCard key={index} recipe={recipe} />
+            <RecipeCard key={index} recipe={recipe}  />
           ))
         ) : (
           <p className="text-gray-500">No recipes found</p>

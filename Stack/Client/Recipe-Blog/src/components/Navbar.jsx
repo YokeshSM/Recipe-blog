@@ -35,7 +35,7 @@ const CookingNavbar = () => {
           </li>
           <li>
             <NavLink
-              to="/recipes"
+              to="/recipe"
               className={({ isActive }) =>
                 isActive
                   ? "text-green-200 font-semibold"
