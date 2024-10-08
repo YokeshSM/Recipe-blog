@@ -7,13 +7,8 @@ const RecipeCard = ({ recipe }) => {
     const [likes, setLikes] = useState(0); 
   
     const handleLike = () => {
-<<<<<<< HEAD
-      setLikes(prevLikes => prevLikes + 1); 
-      setLiked(true)
-=======
       setLiked(!liked)// Increment the like count based on previous state
       setLikes(!liked? likes +1 : likes -1); // Toggle the like state
->>>>>>> 2cd2f80fe41a37aff4976fb9041691c57e5601ff
     };
   
     return (
