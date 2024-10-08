@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import { MdCancel } from "react-icons/md";
+import ladyImage from "../assets/images/c44f0ec9-hero-image-2.png";
+
 const Home = () => {
   const recipes = [
     {
@@ -28,14 +30,14 @@ const Home = () => {
       description:
         "A rich and moist chocolate cake topped with chocolate frosting.",
     },
-    {
-      id: 4,
-      title: "Caesar Salad",
-      image:
-        "https://www.jessicagavin.com/wp-content/uploads/2019/07/caesar-salad-9.jpg",
-      description:
-        "A fresh salad with romaine lettuce, croutons, and Caesar dressing.",
-    },
+    // {
+    //   id: 4,
+    //   title: "Caesar Salad",
+    //   image:
+    //     "https://www.jessicagavin.com/wp-content/uploads/2019/07/caesar-salad-9.jpg",
+    //   description:
+    //     "A fresh salad with romaine lettuce, croutons, and Caesar dressing.",
+    // },
   ];
 
   const seasonalRecipes = [
@@ -48,6 +50,13 @@ const Home = () => {
     },
     {
       id: 2,
+      title: "Summer Fruit Salad",
+      image:
+        "https://images.healthshots.com/healthshots/en/uploads/2024/05/14185356/Fruit-salad.jpg",
+      description: "A refreshing mix of seasonal fruits.",
+    },
+    {
+      id: 3,
       title: "Summer Fruit Salad",
       image:
         "https://images.healthshots.com/healthshots/en/uploads/2024/05/14185356/Fruit-salad.jpg",
@@ -79,23 +88,41 @@ const Home = () => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true,
+    speed: 4000,
+    autoplaySpeed: 500,
+    cssEase: "linear",
   };
 
-   const [visible,setvisible]=useState(false)
-   const handleOpen = () => {
-     setvisible(true)
-   }
+  const [visible, setvisible] = useState(false);
+  const [id, setid] = useState(0);
+  const handleOpen = (id) => {
+    console.log(id);
+    setid(id - 1);
+    setvisible(true);
+  };
   return (
     <div className="bg-gray-100  min-h-screen">
       {/* Header */}
-      <header className="bg-green-800  text-white text-center p-6">
-        <h1 className="text-4xl font-bold">Welcome to Ungal Unavu</h1>
-        <p className="mt-2">Explore our delicious recipes and cooking tips!</p>
+      <header
+        className=" h-[80vh] w-[100%] bg-[#cbcbcb]  text-[#4a4a4a] text-center p-6 flex  justify-start "
+        style={{
+          backgroundImage: `url(${ladyImage})`,
+          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "right",
+        }}
+      >
+        <div className="flex flex-col mt-40 ">
+          <h1 className="font-bold text-6xl ml-16 ">Welcome to Ungal Unavu</h1>
+          <p className="mt-6 ml-20 text-left">
+            Explore our delicious recipes and cooking tips!
+          </p>
+        </div>
       </header>
-      <p className="text-lg p-5 text-center  text-gray-600">
+      <p className="text-lg p-5 text-center  text-gray-600 mt-8">
         Discover delicious recipes, share your culinary creations, and connect
         with fellow food lovers. Let's embark on this tasty journey together!
       </p>
@@ -118,7 +145,7 @@ const Home = () => {
                   <h3 className="text-lg font-semibold mt-2">{recipe.title}</h3>
                   <p className="text-gray-600 mt-1">{recipe.description}</p>
                   <button
-                      onClick={handleOpen}
+                    onClick={() => handleOpen(recipe.id)}
                     className="mt-2 inline-block text-green-600 "
                   >
                     View Recipe
@@ -127,32 +154,30 @@ const Home = () => {
               ))}
             </Slider>
           </div>
-          {
-            visible && (
-              <div className="fixed top-0 left-0 w-full h-screen z-50 flex justify-center items-center">
-                <div className="p-6 w-full max-w-md bg-white">
-                
+          {visible && (
+            <div className="fixed top-0 left-0 w-full h-screen z-50 flex justify-center items-center backdrop-blur-sm">
+              <div className="p-6 w-full max-w-md bg-white">
                 <div className="flex justify-between">
-                <h1 className="text-2xl font-bold">{recipes[0].title}</h1>
-                <MdCancel onClick={() => setvisible(false)}
-                  className="text-4xl text-red-500 hover:text-red-700"/>
-              </div>
-                  
-                  <img
-                    src={recipes[0].image}
-                    alt={recipes[0].title}
-                    className="w-full h-64 object-cover"
-                  />
-                  <p className="text-gray-600 mt-2">{recipes[0].description}</p>
-                  <button
+                  <h1 className="text-2xl font-bold">{recipes[id].title}</h1>
+                  <MdCancel
                     onClick={() => setvisible(false)}
-                    className="mt-2 inline-block text-green-600 "
-                  >
-                  </button>
-                   </div>
+                    className="text-4xl text-red-500 hover:text-red-700"
+                  />
                 </div>
-            )
-          }
+
+                <img
+                  src={recipes[id].image}
+                  alt={recipes[id].title}
+                  className="w-full h-64 object-cover"
+                />
+                <p className="text-gray-600 mt-2">{recipes[id].description}</p>
+                <button
+                  onClick={() => setvisible(false)}
+                  className="mt-2 inline-block text-green-600 "
+                ></button>
+              </div>
+            </div>
+          )}
         </section>
 
         <h2 className="text-2xl font-semibold mb-4">Latest Recipes</h2>
@@ -171,16 +196,16 @@ const Home = () => {
                 <h3 className="text-lg font-semibold">{recipe.title}</h3>
                 <p className="text-gray-600 mt-2">{recipe.description}</p>
                 <button
-                      onClick={() => setvisible(true)}
-                    className="mt-2 inline-block text-green-600 "
-                  >
-                    View Recipe
-                  </button>
+                  onClick={() => handleOpen(recipe.id)}
+                  className="mt-2 inline-block text-green-600 "
+                >
+                  View Recipe
+                </button>
               </div>
             </div>
           ))}
         </div>
-       
+
         {/* Seasonal Recipes Section */}
         <section className="my-8">
           <h2 className="text-2xl font-semibold mb-4 text-center">
@@ -202,10 +227,9 @@ const Home = () => {
                     <h3 className="text-lg font-semibold">{recipe.title}</h3>
                     <p className="text-gray-600 mt-2">{recipe.description}</p>
                     <button
-                    onClick={() => setvisible(false)}
-                    className="mt-2 inline-block text-green-600 "
-                  >
-                  </button>
+                      onClick={() => setvisible(false)}
+                      className="mt-2 inline-block text-green-600 "
+                    ></button>
                   </div>
                 </div>
               ))}
@@ -239,7 +263,6 @@ const Home = () => {
         {/* Carousel Section */}
       </main>
     </div>
-   
   );
 };
 

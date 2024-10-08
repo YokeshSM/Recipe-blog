@@ -1,70 +1,45 @@
-// import React from 'react';
-// import { Link } from 'react-router-dom';
-
-// const SimpleNavbar = () => {
-//   return (
-//     <nav className="bg-gray-900 shadow-md">
-//       <div className="container mx-auto flex justify-between items-center p-4">
-//         <Link to="/" className="text-white text-2xl font-bold">
-//           Logo
-//         </Link>
-//         <ul className="flex space-x-6">
-//           <li>
-//             <Link to="/" className="text-gray-300 hover:text-white transition duration-300">
-//               Home
-//             </Link>
-//           </li>
-//           <li>
-//             <Link to="/about" className="text-gray-300 hover:text-white transition duration-300">
-//               About Us
-//             </Link>
-//           </li>
-//           <li>
-//             <Link to="/recipes" className="text-gray-300 hover:text-white transition duration-300">
-//               Recipes
-//             </Link>
-//           </li>
-//           <li>
-//             <Link to="/blog" className="text-gray-300 hover:text-white transition duration-300">
-//               Blog
-//             </Link>
-//           </li>
-//         </ul>
-//       </div>
-//     </nav>
-//   );
-// };
-
-// export default SimpleNavbar;
-
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-
+import React from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useUser } from "../context/UserContext";
+import { LogOut } from "lucide-react";
+import { toast } from "react-toastify";
+import chef from "../assets/images/chefbg.gif";
 const CookingNavbar = () => {
+  const { user, setUser } = useUser();
+  const handleLogout = async () => {
+    setUser(null);
+    toast("logged out successfully");
+  };
   return (
-    <nav className="bg-green-600 shadow-md">
-      <div className="container mx-auto flex justify-between items-center p-4">
-        <NavLink to="/" className="text-white text-2xl font-bold">
-         Ungal Unavu...
+    <nav className="bg-[#4a4a4a] shadow-md text-[#e0e0e0]">
+      <div className="container mx-auto flex justify-between  items-center p-4">
+        <NavLink to="/" className="text-[#e0e0e0] text-2xl font-bold">
+          <div className="flex flex-row hover:cursor-default">
+            <h4>Ungal Unavu</h4>
+            <img className="h-10 w-10 ml-2" src={chef} alt="chef" />
+          </div>
         </NavLink>
-        
-        <ul className="flex space-x-6">
+
+        <ul className="flex space-x-6 text-[#e0e0e0]">
           <li>
             <NavLink
               to="/"
               className={({ isActive }) =>
-                isActive ? 'text-white font-semibold' : 'text-green-200 hover:text-white transition duration-300'
+                isActive
+                  ? "text-white font-semibold"
+                  : "text-[#e0e0e0] hover:text-white transition duration-300"
               }
             >
               Home
             </NavLink>
           </li>
-          
           <li>
             <NavLink
               to="/recipes"
               className={({ isActive }) =>
-                isActive ? 'text-white font-semibold' : 'text-green-200 hover:text-white transition duration-300'
+                isActive
+                  ? "text-white font-semibold"
+                  : "text-[#e0e0e0] hover:text-white transition duration-300"
               }
             >
               Recipes
@@ -74,7 +49,9 @@ const CookingNavbar = () => {
             <NavLink
               to="/blogs"
               className={({ isActive }) =>
-                isActive ? 'text-white font-semibold' : 'text-green-200 hover:text-white transition duration-300'
+                isActive
+                  ? "text-white font-semibold"
+                  : "text-[#e0e0e0] hover:text-white transition duration-300"
               }
             >
               Blog
@@ -84,31 +61,49 @@ const CookingNavbar = () => {
             <NavLink
               to="/about"
               className={({ isActive }) =>
-                isActive ? 'text-white font-semibold' : 'text-green-200 hover:text-white transition duration-300'
+                isActive
+                  ? "text-[#e0e0e0] font-semibold"
+                  : "text-[#e0e0e0] hover:text-white transition duration-300"
               }
             >
               About Us
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/signup"
-              className={({ isActive }) =>
-                isActive ? 'text-white font-semibold' : 'text-green-200 hover:text-white transition duration-300'
-              }
-            >
-              SignUp
-            </NavLink>
+            {user ? (
+              <span className="text-[#e0e0e0] bg-white p-3 rounded-2xl ">
+                {user.username}
+              </span>
+            ) : (
+              <NavLink
+                to="/signup"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-white font-semibold"
+                    : "text-[#e0e0e0] hover:text-white transition duration-300"
+                }
+              >
+                Sign Up
+              </NavLink>
+            )}
           </li>
           <li>
-            <NavLink
-              to="/signin"
-              className={({ isActive }) =>
-                isActive ? 'text-white font-semibold' : 'text-green-200 hover:text-white transition duration-300'
-              }
-            >
-              SignIn
-            </NavLink>
+            {user ? (
+              <span onClick={handleLogout} className="text-white">
+                <LogOut />
+              </span>
+            ) : (
+              <NavLink
+                to="/signin"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-white font-semibold"
+                    : "text-[#e0e0e0] hover:text-white transition duration-300"
+                }
+              >
+                Sign In
+              </NavLink>
+            )}
           </li>
         </ul>
       </div>
@@ -117,5 +112,3 @@ const CookingNavbar = () => {
 };
 
 export default CookingNavbar;
-
-
