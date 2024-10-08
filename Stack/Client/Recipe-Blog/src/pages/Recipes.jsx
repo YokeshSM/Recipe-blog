@@ -8,19 +8,20 @@ import { CirclePlus } from 'lucide-react';
 
 
 const RecipeCard = ({ recipe }) => {
+  const [liked, setLiked] = useState(false); 
   const [likes, setLikes] = useState(0); // State to track number of likes
 
-  // Handle like button click
   const handleLike = () => {
-    setLikes(recipe.like + 1); // Increment like count
+    setLikes(prevLikes => prevLikes + 1); 
+    setLiked(true)// Increment the like count based on previous state
   };
 
   return (
     <div className="flex flex-row max-w-full w-full md:w-96 h-auto rounded-lg overflow-hidden shadow-lg p-4 m-4 bg-white">
       {/* Image section */}
-      <div className="w-1/3 h-48"> {/* Set fixed height for rectangular shape */}
+      <div className="w-2/3 h-[50%]"> {/* Set fixed height for rectangular shape */}
         <img
-          className="w-full h-full object-cover rounded-lg"
+          className="w-[100%] h-[200%] object-cover rounded-lg"
           src={recipe.image}
           alt={recipe.name}
         />
@@ -50,7 +51,7 @@ const RecipeCard = ({ recipe }) => {
             onClick={handleLike}
             className="flex items-center focus:outline-none"
           >
-            <Heart className="text-red-500 w-6 h-6 mr-2" />
+           <Heart className={`w-6 h-6 mr-2 ${liked ? 'text-red-500' : 'text-gray-400'}`}/>
             <span className="text-gray-700">{recipe.like}</span>
           </button>
         </div>
@@ -110,7 +111,7 @@ const RecipePage = () => {
       <button className="p-3 rounded-md  bg-blue-700 flex justify-end text-white">< CirclePlus className="p-1 size-8" /></button>
       </div>
       {/* Recipe Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2   gap-6">
         {filteredRecipes.length > 0 ? (
           filteredRecipes.map((recipe, index) => (
             <RecipeCard key={index} recipe={recipe} />
