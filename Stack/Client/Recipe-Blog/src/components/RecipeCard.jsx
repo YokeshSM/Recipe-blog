@@ -1,8 +1,10 @@
-import { Heart } from 'lucide-react';
+import { Heart, Trash ,MessageCircleWarning} from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import { Pencil } from 'lucide-react'
+import {toast} from 'react-toastify'
+import { deleteRecipe, editRecipe } from '../services/api';
 
-const RecipeCard = ({ recipe }) => {
+const RecipeCard = ({ recipe ,fetchrecipes}) => {
     const [liked, setLiked] = useState(false); 
     const [likes, setLikes] = useState(0); 
     const [visible, setVisible] = useState(false);
@@ -28,17 +30,61 @@ const RecipeCard = ({ recipe }) => {
       }
       
     };
-  const handleEdit=(e)=>{
+    const handleDelete=async()=>{
+      try {
+        const response=await deleteRecipe(recipe._id)
+        console.log(response)
+        if(response.status===200){
+          toast('Project deleted!', {
+            className: 'bg-gradient-to-r from-red-500 to-pink-500 rounded-lg shadow-lg text-white p-3 flex gap-5 text-lg font-bold',
+            icon: <Trash />,
+          }
+        );
+        fetchrecipes()
+
+        }        
+      } catch (error) {
+        console.log(error.message)
+        toast('Error: ' + error.message, {
+          className: 'bg-gradient-to-r from-yellow-500 to-amber-500 rounded-lg shadow-lg text-white p-3 flex gap-5 text-lg font-bold',
+          icon: <MessageCircleWarning />,
+        });
+        
+      }
+      // fetchrecipes();
+    
+    }
+  const handleEdit= async(e)=>{
     e.preventDefault();
     const recipeData={
       name:nameState,
       image:imageState,
-      serving:servingState,
+      servings:servingState,
       prepTime:prepTimeState,
       method:methodState,
+      ingredients:ingredientState
+    };
+    try {
+      console.log(recipe._id)
+      const response=await editRecipe(recipe._id,recipeData)
+      if (response.status === 200) {
+        console.log('finish')
+        toast('Project edited!', {
+          className: 'bg-gradient-to-r from-red-500 to-pink-500 rounded-lg shadow-lg text-white p-3 flex gap-5 text-lg font-bold',
+          icon: <Trash />,
+        });
+        fetchrecipes()
+      }
+    } catch (error) {
+      console.log(error)
       
     }
+    setVisible(false)
+    // fetchrecipes()
 
+    useEffect(()=>{
+  fetchrecipes();
+    },[])
   }
     return (
       <div className="flex flex-row max-w-full w-full md:w-96 h-auto rounded-lg overflow-hidden shadow-lg p-4 m-4 bg-white">
@@ -81,6 +127,7 @@ const RecipeCard = ({ recipe }) => {
   
           <div className="flex items-center mt-4">
             <button className="flex items-center focus:outline-none">
+            <Trash className='text-red-500 mr-2' onClick={handleDelete}/>
               <Pencil className="text-gray-600 w-4 h-4 mr-2" onClick={()=>setVisible(true)} />
               <span className="text-gray-700">Edit</span>
             </button>
@@ -96,12 +143,12 @@ const RecipeCard = ({ recipe }) => {
                 <button onClick={() => setVisible(false)} className="text-gray-500 hover:text-gray-700">Close</button>
               </div>
               <form className="p-4 flex flex-col gap-4" onSubmit={handleEdit}>
-                <input type="text" value={nameState} onChange={(e) => setTitleState(e.target.value)} placeholder="Title" className="p-2 border rounded" required />
-                <input type="text" value={imageState} onChange={(e) => setDescState(e.target.value)} placeholder="Description" className="p-2 border rounded" required />
-                <input type="text" value={prepTimeState} onChange={(e) => setLinkState(e.target.value)} placeholder="Project Link" className="p-2 border rounded" required />
-                <input type="text" value={servingState} onChange={(e) => setImageState(e.target.value)} placeholder="Image URL" className="p-2 border rounded" required />
-                <input type="text" value={ingredientState} onChange={(e) => setGitState(e.target.value)} placeholder="Git" className="p-2 border rounded" required />
-                <input type="text" value={methodState} onChange={(e) => setGitState(e.target.value)} placeholder="Git" className="p-2 border rounded" required />
+                <input type="text" value={nameState} onChange={(e) => setName(e.target.value)} placeholder="Recipe name" className="p-2 border rounded" required />
+                <input type="text" value={imageState} onChange={(e) => setImagee(e.target.value)} placeholder="Image url" className="p-2 border rounded" required />
+                <input type="text" value={prepTimeState} onChange={(e) => setPrepTime(e.target.value)} placeholder="PrepTime" className="p-2 border rounded" required />
+                <input type="text" value={servingState} onChange={(e) => setServing(e.target.value)} placeholder="serving" className="p-2 border rounded" required />
+                <input type="text" value={ingredientState} onChange={(e) => setIngredient(e.target.value)} placeholder="ingredient" className="p-2 border rounded" required />
+                <input type="text" value={methodState} onChange={(e) => setMethod(e.target.value)} placeholder="method" className="p-2 border rounded" required />
                 <button type="submit" className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Update Project</button>
               </form>
             </div>
