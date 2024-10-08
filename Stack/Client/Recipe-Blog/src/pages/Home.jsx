@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import { MdCancel } from "react-icons/md";
 import ladyImage from "../assets/images/c44f0ec9-hero-image-2.png";
+
 const Home = () => {
   const recipes = [
     {
@@ -80,13 +81,19 @@ const Home = () => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true,
+    speed: 4000,
+    autoplaySpeed: 500,
+    cssEase: "linear",
   };
 
   const [visible, setvisible] = useState(false);
-  const handleOpen = () => {
+  const [id, setid] = useState(0);
+  const handleOpen = (id) => {
+    console.log(id);
+    setid(id - 1);
     setvisible(true);
   };
   return (
@@ -102,7 +109,7 @@ const Home = () => {
         }}
       >
         <div className="flex flex-col mt-40 ">
-          <h1 className="font-bold text-6xl ml-16">Welcome to Ungal Unavu</h1>
+          <h1 className="font-bold text-6xl ml-16 ">Welcome to Ungal Unavu</h1>
           <p className="mt-6 ml-20 text-left">
             Explore our delicious recipes and cooking tips!
           </p>
@@ -131,7 +138,7 @@ const Home = () => {
                   <h3 className="text-lg font-semibold mt-2">{recipe.title}</h3>
                   <p className="text-gray-600 mt-1">{recipe.description}</p>
                   <button
-                    onClick={handleOpen}
+                    onClick={() => handleOpen(recipe.id)}
                     className="mt-2 inline-block text-green-600 "
                   >
                     View Recipe
@@ -141,10 +148,10 @@ const Home = () => {
             </Slider>
           </div>
           {visible && (
-            <div className="fixed top-0 left-0 w-full h-screen z-50 flex justify-center items-center">
+            <div className="fixed top-0 left-0 w-full h-screen z-50 flex justify-center items-center backdrop-blur-sm">
               <div className="p-6 w-full max-w-md bg-white">
                 <div className="flex justify-between">
-                  <h1 className="text-2xl font-bold">{recipes[0].title}</h1>
+                  <h1 className="text-2xl font-bold">{recipes[id].title}</h1>
                   <MdCancel
                     onClick={() => setvisible(false)}
                     className="text-4xl text-red-500 hover:text-red-700"
@@ -152,11 +159,11 @@ const Home = () => {
                 </div>
 
                 <img
-                  src={recipes[0].image}
-                  alt={recipes[0].title}
+                  src={recipes[id].image}
+                  alt={recipes[id].title}
                   className="w-full h-64 object-cover"
                 />
-                <p className="text-gray-600 mt-2">{recipes[0].description}</p>
+                <p className="text-gray-600 mt-2">{recipes[id].description}</p>
                 <button
                   onClick={() => setvisible(false)}
                   className="mt-2 inline-block text-green-600 "
@@ -182,7 +189,7 @@ const Home = () => {
                 <h3 className="text-lg font-semibold">{recipe.title}</h3>
                 <p className="text-gray-600 mt-2">{recipe.description}</p>
                 <button
-                  onClick={() => setvisible(true)}
+                  onClick={() => handleOpen(recipe.id)}
                   className="mt-2 inline-block text-green-600 "
                 >
                   View Recipe
