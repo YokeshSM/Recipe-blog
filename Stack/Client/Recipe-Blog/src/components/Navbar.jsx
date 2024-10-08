@@ -14,7 +14,7 @@ const CookingNavbar = () => {
     <nav className="bg-green-600 shadow-md">
       <div className="container mx-auto flex justify-between items-center p-4">
         <NavLink to="/" className="text-white text-2xl font-bold">
-          <div className="flex flex-row">
+          <div className="flex flex-row hover:cursor-default">
             <h4>Ungal Unavu</h4>
             <img className="h-10 w-10 ml-2" src={chef} alt="chef" />
           </div>

@@ -30,14 +30,14 @@ const Home = () => {
       description:
         "A rich and moist chocolate cake topped with chocolate frosting.",
     },
-    {
-      id: 4,
-      title: "Caesar Salad",
-      image:
-        "https://www.jessicagavin.com/wp-content/uploads/2019/07/caesar-salad-9.jpg",
-      description:
-        "A fresh salad with romaine lettuce, croutons, and Caesar dressing.",
-    },
+    // {
+    //   id: 4,
+    //   title: "Caesar Salad",
+    //   image:
+    //     "https://www.jessicagavin.com/wp-content/uploads/2019/07/caesar-salad-9.jpg",
+    //   description:
+    //     "A fresh salad with romaine lettuce, croutons, and Caesar dressing.",
+    // },
   ];
 
   const seasonalRecipes = [
@@ -50,6 +50,13 @@ const Home = () => {
     },
     {
       id: 2,
+      title: "Summer Fruit Salad",
+      image:
+        "https://images.healthshots.com/healthshots/en/uploads/2024/05/14185356/Fruit-salad.jpg",
+      description: "A refreshing mix of seasonal fruits.",
+    },
+    {
+      id: 3,
       title: "Summer Fruit Salad",
       image:
         "https://images.healthshots.com/healthshots/en/uploads/2024/05/14185356/Fruit-salad.jpg",
@@ -100,7 +107,7 @@ const Home = () => {
     <div className="bg-gray-100  min-h-screen">
       {/* Header */}
       <header
-        className=" h-[80vh] w-[100vw] bg-green-800  text-white text-center p-6 flex  justify-start "
+        className=" h-[80vh] w-[100%] bg-green-800  text-white text-center p-6 flex  justify-start "
         style={{
           backgroundImage: `url(${ladyImage})`,
           backgroundSize: "contain",
