@@ -37,34 +37,43 @@
 
 // export default SimpleNavbar;
 
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useUser } from "../context/UserContext";
+import { LogOut } from "lucide-react";
 
 const CookingNavbar = () => {
+  const { user, setUser } = useUser();
+  const handleLogout = async () => {
+    setUser(null);
+  };
   return (
     <nav className="bg-green-600 shadow-md">
       <div className="container mx-auto flex justify-between items-center p-4">
         <NavLink to="/" className="text-white text-2xl font-bold">
-         Ungal Unavu...
+          Ungal Unavu...
         </NavLink>
-        
+
         <ul className="flex space-x-6">
           <li>
             <NavLink
               to="/"
               className={({ isActive }) =>
-                isActive ? 'text-white font-semibold' : 'text-green-200 hover:text-white transition duration-300'
+                isActive
+                  ? "text-white font-semibold"
+                  : "text-green-200 hover:text-white transition duration-300"
               }
             >
               Home
             </NavLink>
           </li>
-          
           <li>
             <NavLink
               to="/recipes"
               className={({ isActive }) =>
-                isActive ? 'text-white font-semibold' : 'text-green-200 hover:text-white transition duration-300'
+                isActive
+                  ? "text-white font-semibold"
+                  : "text-green-200 hover:text-white transition duration-300"
               }
             >
               Recipes
@@ -74,7 +83,9 @@ const CookingNavbar = () => {
             <NavLink
               to="/blogs"
               className={({ isActive }) =>
-                isActive ? 'text-white font-semibold' : 'text-green-200 hover:text-white transition duration-300'
+                isActive
+                  ? "text-white font-semibold"
+                  : "text-green-200 hover:text-white transition duration-300"
               }
             >
               Blog
@@ -84,31 +95,49 @@ const CookingNavbar = () => {
             <NavLink
               to="/about"
               className={({ isActive }) =>
-                isActive ? 'text-white font-semibold' : 'text-green-200 hover:text-white transition duration-300'
+                isActive
+                  ? "text-white font-semibold"
+                  : "text-green-200 hover:text-white transition duration-300"
               }
             >
               About Us
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/signup"
-              className={({ isActive }) =>
-                isActive ? 'text-white font-semibold' : 'text-green-200 hover:text-white transition duration-300'
-              }
-            >
-              SignUp
-            </NavLink>
+            {user ? (
+              <span className="text-black bg-white p-3 rounded-2xl">
+                {user.username}
+              </span>
+            ) : (
+              <NavLink
+                to="/signup"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-white font-semibold"
+                    : "text-green-200 hover:text-white transition duration-300"
+                }
+              >
+                Sign Up
+              </NavLink>
+            )}
           </li>
           <li>
-            <NavLink
-              to="/signin"
-              className={({ isActive }) =>
-                isActive ? 'text-white font-semibold' : 'text-green-200 hover:text-white transition duration-300'
-              }
-            >
-              SignIn
-            </NavLink>
+            {user ? (
+              <span onClick={handleLogout} className="text-white">
+                <LogOut />
+              </span>
+            ) : (
+              <NavLink
+                to="/signin"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-white font-semibold"
+                    : "text-green-200 hover:text-white transition duration-300"
+                }
+              >
+                Sign In
+              </NavLink>
+            )}
           </li>
         </ul>
       </div>
@@ -117,5 +146,3 @@ const CookingNavbar = () => {
 };
 
 export default CookingNavbar;
-
-

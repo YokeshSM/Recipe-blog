@@ -2,8 +2,10 @@ import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useUser } from "../context/UserContext.jsx";
 
 const SignUp = () => {
+  const { setUser } = useUser();
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -29,14 +31,14 @@ const SignUp = () => {
         formData
       );
       console.log("---------------------------------------------");
-      console.log(response.data); // Log the response data
+      console.log(response.data);
       console.log("---------------------------------------------");
 
-      toast.success("Successfully submitted"); // Notify success
+      toast.success("Successfully submitted");
+      setUser(response.data.user);
       console.log("Form submitted:", formData);
 
-      // Navigate to the main page after successful signup
-      navigate("/"); // Change "/" to your desired route
+      navigate("/");
     } catch (error) {
       console.error("Error submitting form:", error);
       toast.error("Failed to submit"); // Notify failure

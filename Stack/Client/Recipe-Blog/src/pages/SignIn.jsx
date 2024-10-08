@@ -1,12 +1,35 @@
 import React from "react";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { Navigate, useNavigate } from "react-router-dom";
+// import { useUser } from "../context/userContext.jsx";
+import { useUser } from "../context/UserContext";
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const handleSubmit = (e) => {
+  const { setUser } = useUser();
+  const nav = useNavigate();
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add sign-in logic here
+
+    try {
+      const response = await axios.post("http://localhost:4000/auth/signin", {
+        email,
+        password,
+      });
+      console.log("Response:", response.data);
+      setUser(response.data.user);
+      nav("/");
+      toast("Sign Up Successful!");
+    } catch (error) {
+      console.error("Error during sign up:", error);
+      toast(
+        "Sign Up Failed: " +
+          (error.response?.data.message || "An error occurred")
+      );
+    }
+
     console.log("Email:", email);
     console.log("Password:", password);
   };
