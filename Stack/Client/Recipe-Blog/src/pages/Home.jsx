@@ -107,7 +107,7 @@ const Home = () => {
     <div className="bg-gray-100  min-h-screen">
       {/* Header */}
       <header
-        className=" h-[80vh] w-[100%] bg-green-800  text-white text-center p-6 flex  justify-start "
+        className=" h-[80vh] w-[100%] bg-[#cbcbcb]  text-[#4a4a4a] text-center p-6 flex  justify-start "
         style={{
           backgroundImage: `url(${ladyImage})`,
           backgroundSize: "contain",

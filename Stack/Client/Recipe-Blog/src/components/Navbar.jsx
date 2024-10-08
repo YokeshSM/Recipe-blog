@@ -11,23 +11,23 @@ const CookingNavbar = () => {
     toast("logged out successfully");
   };
   return (
-    <nav className="bg-green-600 shadow-md">
-      <div className="container mx-auto flex justify-between items-center p-4">
-        <NavLink to="/" className="text-white text-2xl font-bold">
+    <nav className="bg-[#4a4a4a] shadow-md text-[#e0e0e0]">
+      <div className="container mx-auto flex justify-between  items-center p-4">
+        <NavLink to="/" className="text-[#e0e0e0] text-2xl font-bold">
           <div className="flex flex-row hover:cursor-default">
             <h4>Ungal Unavu</h4>
             <img className="h-10 w-10 ml-2" src={chef} alt="chef" />
           </div>
         </NavLink>
 
-        <ul className="flex space-x-6">
+        <ul className="flex space-x-6 text-[#e0e0e0]">
           <li>
             <NavLink
               to="/"
               className={({ isActive }) =>
                 isActive
                   ? "text-white font-semibold"
-                  : "text-green-200 hover:text-white transition duration-300"
+                  : "text-[#e0e0e0] hover:text-white transition duration-300"
               }
             >
               Home
@@ -39,7 +39,7 @@ const CookingNavbar = () => {
               className={({ isActive }) =>
                 isActive
                   ? "text-white font-semibold"
-                  : "text-green-200 hover:text-white transition duration-300"
+                  : "text-[#e0e0e0] hover:text-white transition duration-300"
               }
             >
               Recipes
@@ -51,7 +51,7 @@ const CookingNavbar = () => {
               className={({ isActive }) =>
                 isActive
                   ? "text-white font-semibold"
-                  : "text-green-200 hover:text-white transition duration-300"
+                  : "text-[#e0e0e0] hover:text-white transition duration-300"
               }
             >
               Blog
@@ -62,8 +62,8 @@ const CookingNavbar = () => {
               to="/about"
               className={({ isActive }) =>
                 isActive
-                  ? "text-white font-semibold"
-                  : "text-green-200 hover:text-white transition duration-300"
+                  ? "text-[#e0e0e0] font-semibold"
+                  : "text-[#e0e0e0] hover:text-white transition duration-300"
               }
             >
               About Us
@@ -71,7 +71,7 @@ const CookingNavbar = () => {
           </li>
           <li>
             {user ? (
-              <span className="text-black bg-white p-3 rounded-2xl">
+              <span className="text-[#e0e0e0] bg-white p-3 rounded-2xl ">
                 {user.username}
               </span>
             ) : (
@@ -80,7 +80,7 @@ const CookingNavbar = () => {
                 className={({ isActive }) =>
                   isActive
                     ? "text-white font-semibold"
-                    : "text-green-200 hover:text-white transition duration-300"
+                    : "text-[#e0e0e0] hover:text-white transition duration-300"
                 }
               >
                 Sign Up
@@ -98,7 +98,7 @@ const CookingNavbar = () => {
                 className={({ isActive }) =>
                   isActive
                     ? "text-white font-semibold"
-                    : "text-green-200 hover:text-white transition duration-300"
+                    : "text-[#e0e0e0] hover:text-white transition duration-300"
                 }
               >
                 Sign In
