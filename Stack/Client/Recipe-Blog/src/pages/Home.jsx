@@ -117,7 +117,7 @@ const Home = () => {
       >
         <div className="flex flex-col mt-40 ">
           <h1 className="font-bold text-6xl ml-16 ">Welcome to Ungal Unavu</h1>
-          <p className="mt-6 ml-20 text-left">
+          <p className="mt-6 ml-20 text-left font-bold">
             Explore our delicious recipes and cooking tips!
           </p>
         </div>
@@ -253,7 +253,7 @@ const Home = () => {
           <h2 className="text-2xl font-semibold mb-4">Cooking Tips</h2>
           <ul className="list-disc pl-6 space-y-2">
             {tips.map((tip, index) => (
-              <li key={index} className="text-gray-700">
+              <li key={index} className="text-gray-700 font-bold">
                 {tip}
               </li>
             ))}

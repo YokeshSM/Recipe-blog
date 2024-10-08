@@ -26,8 +26,8 @@ const CookingNavbar = () => {
               to="/"
               className={({ isActive }) =>
                 isActive
-                  ? "text-white font-semibold"
-                  : "text-[#e0e0e0] hover:text-white transition duration-300"
+                  ? "text-green-200 font-extrabold"
+                  : "text-[#e0e0e0] font-bold hover:text-white transition duration-300"
               }
             >
               Home
@@ -38,8 +38,8 @@ const CookingNavbar = () => {
               to="/recipes"
               className={({ isActive }) =>
                 isActive
-                  ? "text-white font-semibold"
-                  : "text-[#e0e0e0] hover:text-white transition duration-300"
+                  ? "text-green-200 font-semibold"
+                  : "text-[#e0e0e0] font-bold hover:text-white transition duration-300"
               }
             >
               Recipes
@@ -50,8 +50,8 @@ const CookingNavbar = () => {
               to="/blogs"
               className={({ isActive }) =>
                 isActive
-                  ? "text-white font-semibold"
-                  : "text-[#e0e0e0] hover:text-white transition duration-300"
+                  ? "text-green-200 font-semibold"
+                  : "text-[#e0e0e0] font-bold hover:text-white transition duration-300"
               }
             >
               Blog
@@ -62,8 +62,8 @@ const CookingNavbar = () => {
               to="/about"
               className={({ isActive }) =>
                 isActive
-                  ? "text-[#e0e0e0] font-semibold"
-                  : "text-[#e0e0e0] hover:text-white transition duration-300"
+                  ? "text-green-200 font-semibold"
+                  : "text-[#e0e0e0] font-bold hover:text-white transition duration-300"
               }
             >
               About Us
@@ -79,8 +79,8 @@ const CookingNavbar = () => {
                 to="/signup"
                 className={({ isActive }) =>
                   isActive
-                    ? "text-white font-semibold"
-                    : "text-[#e0e0e0] hover:text-white transition duration-300"
+                    ? "text-green-200 font-semibold"
+                    : "text-[#e0e0e0] font-bold hover:text-white transition duration-300"
                 }
               >
                 Sign Up
@@ -97,8 +97,8 @@ const CookingNavbar = () => {
                 to="/signin"
                 className={({ isActive }) =>
                   isActive
-                    ? "text-white font-semibold"
-                    : "text-[#e0e0e0] hover:text-white transition duration-300"
+                    ? "text-green-200 font-extrabold"
+                    : "text-[#e0e0e0] font-bold hover:text-white transition duration-300"
                 }
               >
                 Sign In
