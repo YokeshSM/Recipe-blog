@@ -98,10 +98,17 @@ const Home = () => {
 
   const [visible, setvisible] = useState(false);
   const [id, setid] = useState(0);
+  const [visible1, setvisible1] = useState(false);
+  const [id1, setid1] = useState(0);
   const handleOpen = (id) => {
     console.log(id);
     setid(id - 1);
     setvisible(true);
+  };
+  const handleOpen1 = (id) => {
+    console.log(id );
+    setid1(id - 1);
+    setvisible1(true);
   };
   return (
     <div className="bg-gray-100  min-h-screen">
@@ -227,15 +234,39 @@ const Home = () => {
                     <h3 className="text-lg font-semibold">{recipe.title}</h3>
                     <p className="text-gray-600 mt-2">{recipe.description}</p>
                     <button
-                      onClick={() => setvisible(false)}
+                      onClick={() => handleOpen1(recipe.id)}
                       className="mt-2 inline-block text-green-600 "
-                    ></button>
+                    >View More</button>
                   </div>
                 </div>
               ))}
             </div>
           </div>
         </section>
+        {visible1 && (
+            <div className="fixed top-0 left-0 w-full h-screen z-50 flex justify-center items-center backdrop-blur-sm">
+              <div className="p-6 w-full max-w-md bg-white rounded-lg border-black border-2 hover:p-8">
+                <div className="flex justify-between">
+                  <h1 className="text-2xl font-bold">{seasonalRecipes[id1].title}</h1>
+                  <MdCancel
+                    onClick={() => setvisible1(false)}
+                    className="text-4xl text-red-500 hover:text-red-700"
+                  />
+                </div>
+
+                <img
+                  src={seasonalRecipes[id1].image}
+                  alt={seasonalRecipes[id1].title}
+                  className="w-full h-64 object-cover"
+                />
+                <p className="text-gray-600 mt-2">{seasonalRecipes[id1].description}</p>
+                <button
+                  onClick={() => setvisible1(false)}
+                  className="mt-2 inline-block text-green-600 "
+                ></button>
+              </div>
+            </div>
+          )}
 
         {/* Testimonials Section
         <section className="my-8 bg-white p-6 rounded-lg shadow">
