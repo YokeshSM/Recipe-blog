@@ -1,48 +1,9 @@
-// import React from 'react';
-// import { Link } from 'react-router-dom';
-
-// const SimpleNavbar = () => {
-//   return (
-//     <nav className="bg-gray-900 shadow-md">
-//       <div className="container mx-auto flex justify-between items-center p-4">
-//         <Link to="/" className="text-white text-2xl font-bold">
-//           Logo
-//         </Link>
-//         <ul className="flex space-x-6">
-//           <li>
-//             <Link to="/" className="text-gray-300 hover:text-white transition duration-300">
-//               Home
-//             </Link>
-//           </li>
-//           <li>
-//             <Link to="/about" className="text-gray-300 hover:text-white transition duration-300">
-//               About Us
-//             </Link>
-//           </li>
-//           <li>
-//             <Link to="/recipes" className="text-gray-300 hover:text-white transition duration-300">
-//               Recipes
-//             </Link>
-//           </li>
-//           <li>
-//             <Link to="/blog" className="text-gray-300 hover:text-white transition duration-300">
-//               Blog
-//             </Link>
-//           </li>
-//         </ul>
-//       </div>
-//     </nav>
-//   );
-// };
-
-// export default SimpleNavbar;
-
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext";
 import { LogOut } from "lucide-react";
 import { toast } from "react-toastify";
-
+import chef from "../assets/images/chefbg.gif";
 const CookingNavbar = () => {
   const { user, setUser } = useUser();
   const handleLogout = async () => {
@@ -53,7 +14,10 @@ const CookingNavbar = () => {
     <nav className="bg-green-600 shadow-md">
       <div className="container mx-auto flex justify-between items-center p-4">
         <NavLink to="/" className="text-white text-2xl font-bold">
-          Ungal Unavu...
+          <div className="flex flex-row">
+            <h4>Ungal Unavu</h4>
+            <img className="h-10 w-10 ml-2" src={chef} alt="chef" />
+          </div>
         </NavLink>
 
         <ul className="flex space-x-6">
