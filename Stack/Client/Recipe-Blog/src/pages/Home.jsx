@@ -123,8 +123,8 @@ const Home = () => {
         }}
       >
         <div className="flex flex-col mt-40 ">
-          <h1 className="font-bold text-6xl ml-16 ">Welcome to Ungal Unavu</h1>
-          <p className="mt-6 ml-20 text-left font-bold">
+          <h1 className="font-bold text-6xl ml-1  ">Welcome to Ungal Unavu</h1>
+          <p className="mt-6 ml-28 text-left font-bold">
             Explore our delicious recipes and cooking tips!
           </p>
         </div>

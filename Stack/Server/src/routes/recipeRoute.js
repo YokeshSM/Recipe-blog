@@ -38,35 +38,35 @@ recipeRouter.post("/add", async (req, res) => {
 // Editing a recipe
 recipeRouter.put("/edit/:id", async (req, res) => {
   try {
-    const recipeId = req.params.id; // Corrected to recipeId
+    const recipeId = req.params.id; 
     const currentRecipe = await RecipeModel.findOne({ _id: recipeId }); // Corrected to RecipeModel and currentRecipe
     if (!currentRecipe) {
+      console.log(recipeId+" "+"not found")
       return res.status(400).json({ message: "Recipe not found" }); // Corrected to Recipe
     }
-    const updateRecipe = await RecipeModel.findByIdAndUpdate(
-      recipeId,
-      req.body,
-      {
+    const updateRecipe = await RecipeModel.findByIdAndUpdate( recipeId,req.body,
+      { 
         new: true,
       }
     );
     res.status(200).json(updateRecipe);
   } catch (error) {
+    console.log(error)
     res.status(400).json(error);
   }
 });
 
-// Deleting a recipe
 recipeRouter.delete("/delete/:id", async (req, res) => {
   try {
-    const recipeId = req.params.id; // Corrected to recipeId
-    const currentRecipe = await RecipeModel.findOne({ _id: recipeId }); // Corrected to RecipeModel and currentRecipe
+    const recipeId = req.params.id; 
+    const currentRecipe = await RecipeModel.findOne({ _id: recipeId }); 
     if (!currentRecipe) {
-      return res.status(400).json({ message: "Recipe not found.." }); // Corrected to Recipe
+      return res.status(400).json({ message: "Recipe not found.." }); 
     }
-    const deleteRecipe = await RecipeModel.findByIdAndDelete(recipeId); // Corrected to findByIdAndDelete
-    res.status(200).json({ message: "Recipe Deleted..." }); // Corrected to Recipe
+    const deleteRecipe = await RecipeModel.findByIdAndDelete(recipeId); 
+    res.status(200).json({ message: "Recipe Deleted..." }); 
   } catch (error) {
+    console.log(error+" "+routes);
     res.status(400).json(error);
   }
 });
