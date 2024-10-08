@@ -156,7 +156,7 @@ const Home = () => {
           </div>
           {visible && (
             <div className="fixed top-0 left-0 w-full h-screen z-50 flex justify-center items-center backdrop-blur-sm">
-              <div className="p-6 w-full max-w-md bg-white">
+              <div className="p-6 w-full max-w-md bg-white rounded-lg border-black border-2 hover:p-8">
                 <div className="flex justify-between">
                   <h1 className="text-2xl font-bold">{recipes[id].title}</h1>
                   <MdCancel

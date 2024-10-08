@@ -7,8 +7,8 @@ const RecipeCard = ({ recipe }) => {
     const [likes, setLikes] = useState(0); // State to track number of likes
   
     const handleLike = () => {
-      setLikes(prevLikes => prevLikes + 1); 
-      setLiked(true)// Increment the like count based on previous state
+      setLiked(!liked)// Increment the like count based on previous state
+      setLikes(!liked? likes +1 : likes -1); // Toggle the like state
     };
   
     return (
@@ -43,11 +43,12 @@ const RecipeCard = ({ recipe }) => {
           <div className="flex justify-between">
           <div className="flex items-center mt-4">
             <button
-              onClick={handleLike}
+              onClick={handleLike }
               className="flex items-center focus:outline-none"
             >
+             
              <Heart className={`w-6 h-6 mr-2 ${liked ? 'text-red-500' : 'text-gray-400'}`}/>
-              <span className="text-gray-700">{recipe.like}</span>
+              <span className="text-gray-700">{likes}</span>
             </button>
           </div>
   

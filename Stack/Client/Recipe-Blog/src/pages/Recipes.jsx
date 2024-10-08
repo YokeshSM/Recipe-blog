@@ -2,8 +2,9 @@ import { Heart } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import { getrecipes } from '../services/api'; // Make sure this API service is working
 import { Pencil } from 'lucide-react'
-import { CirclePlus } from 'lucide-react';
+
 import RecipeCard from '../components/RecipeCard'
+import AddComponent  from '../components/AddComponent'
 
 // RecipeCard Component
 
@@ -47,7 +48,10 @@ const RecipePage = () => {
         />
       </div>
       <div className="w-full  flex justify-end">
-      <button className="p-3 rounded-md  bg-blue-700 flex justify-end text-white">< CirclePlus className="p-1 size-8" /></button>
+      {/* <button className="p-3 rounded-md  bg-blue-700 flex justify-end text-white">
+        < CirclePlus className="p-1 size-8" />
+        </button> */}
+        <AddComponent />  {/* Add new recipe component */}
       </div>
       {/* Recipe Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2   gap-6">
