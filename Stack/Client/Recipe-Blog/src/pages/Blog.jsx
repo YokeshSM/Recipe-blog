@@ -46,7 +46,8 @@ const BlogCard = ({ post }) => (
         <p className="text-gray-700 mb-4">{post.description}</p>
       </div>
       <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 self-start md:self-end">
-        Read More
+       Read More
+        
       </button>
     </div>
   </div>
