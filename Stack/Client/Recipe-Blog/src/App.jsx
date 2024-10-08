@@ -14,13 +14,14 @@ import SignUp from "./pages/SignUp";
 import "react-toastify/dist/ReactToastify.css";
 // import { UserProvider } from "./context/userContext";
 import { UserProvider } from "./context/UserContext";
+import AddPage from "./pages/AddPage";
 
 function App() {
   return (
     <UserProvider>
       <Router>
         <Navbar />
-        <ToastContainer   />
+        <ToastContainer />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -28,8 +29,9 @@ function App() {
           <Route path="/recipes" element={<OurRecipes />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/addPage" element={<AddPage />} />
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </Router>
     </UserProvider>
   );
