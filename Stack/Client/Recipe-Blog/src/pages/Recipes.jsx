@@ -20,7 +20,11 @@ const RecipePage = () => {
   const fetchrecipes = async () => {
     try {
       const { data } = await getrecipes();
-      setData(data);
+      if (Array.isArray(data)) {
+        setData(data);
+      } else {
+        console.log("Data fetched is not an array:", data);
+      }
     } catch (error) {
       console.log(error);
     }

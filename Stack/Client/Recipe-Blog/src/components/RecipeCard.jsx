@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Pencil } from 'lucide-react'
 import {toast} from 'react-toastify'
 import { deleteRecipe, editRecipe } from '../services/api';
+import { MdCancel } from "react-icons/md";
 
 const RecipeCard = ({ recipe ,fetchrecipes}) => {
     const [liked, setLiked] = useState(false); 
@@ -15,20 +16,31 @@ const RecipeCard = ({ recipe ,fetchrecipes}) => {
     const [ingredientState,setIngredient]=useState(recipe.ingredients)
     const[methodState,setMethod]=useState(recipe.method)
   
-    const handleLike = (id) => {
+    const handleLike = async(e) => {
+     e.preventDefault();
+     setLiked(!liked);
+     const updatedLikes = liked ? recipe.like - 1 : recipe.like + 1;
+     setLikes(updatedLikes);
+     const recipeData = {
+       like: updatedLikes
+     };
       try {
-        const response = await (id);
+        const response=await editRecipe(recipe._id,recipeData)
         console.log(response.status);
         if (response.status === 200) {
-          console.log("Deleted");
-          fetchprojects()
+          toast('Liked!', {
+            className: 'bg-gradient-to-r from-green-500 to-teal-500 rounded-lg shadow-lg text-white p-3 flex gap-5 text-lg font-bold',
+            icon: <Heart />,
+          });
+          fetchrecipes(); // Fetch updated recipes after liking
         }
-        fetchprojects();
       } catch (error) {
-        window.alert(error);
-        console.log("error");
+        console.error('Error updating like status:', error.message);
+        toast('Error: ' + error.message, {
+          className: 'bg-gradient-to-r from-yellow-500 to-amber-500 rounded-lg shadow-lg text-white p-3 flex gap-5 text-lg font-bold',
+          icon: <MessageCircleWarning />,
+        });
       }
-      
     };
     const handleDelete=async()=>{
       try {
@@ -115,7 +127,7 @@ const RecipeCard = ({ recipe ,fetchrecipes}) => {
           <div className="flex justify-between">
           <div className="flex items-center mt-4">
             <button
-              onClick={()=>{handleLike(id)}}
+              onClick={handleLike}
               className="flex items-center focus:outline-none"
             >
              
@@ -128,8 +140,10 @@ const RecipeCard = ({ recipe ,fetchrecipes}) => {
           <div className="flex items-center mt-4">
             <button className="flex items-center focus:outline-none">
             <Trash className='text-red-500 mr-2' onClick={handleDelete}/>
-              <Pencil className="text-gray-600 w-4 h-4 mr-2" onClick={()=>setVisible(true)} />
+               <div className='flex items-center ' onClick={()=>setVisible(true)} >
+              <Pencil className="text-gray-600 w-4 h-4 mr-2" />
               <span className="text-gray-700">Edit</span>
+               </div>
             </button>
           </div>
           </div>
@@ -140,7 +154,9 @@ const RecipeCard = ({ recipe ,fetchrecipes}) => {
             <div className="bg-white rounded-lg shadow-lg w-11/12 sm:w-3/4 md:w-1/2 lg:w-1/3">
               <div className="flex justify-between items-center p-4 border-b text-blue-500 font-bold">
                 <span>Edit Project</span>
-                <button onClick={() => setVisible(false)} className="text-gray-500 hover:text-gray-700">Close</button>
+                <button onClick={() => setVisible(false)} className="text-gray-500 text-4xl hover:text-red-600">
+                <MdCancel></MdCancel>
+                </button>
               </div>
               <form className="p-4 flex flex-col gap-4" onSubmit={handleEdit}>
                 <input type="text" value={nameState} onChange={(e) => setName(e.target.value)} placeholder="Recipe name" className="p-2 border rounded" required />
@@ -155,6 +171,6 @@ const RecipeCard = ({ recipe ,fetchrecipes}) => {
           </div>
         )}
       </div>
-    );
+    )
   };
   export default RecipeCard

@@ -71,8 +71,9 @@ const CookingNavbar = () => {
           </li>
           <li>
             {user ? (
-              <span className="text-[#e0e0e0] bg-white p-3 rounded-2xl ">
+              <span className="text-gray-700 bg-white p-2 rounded-2xl hover:bg-green-500">
                 {user.username}
+                
               </span>
             ) : (
               <NavLink
