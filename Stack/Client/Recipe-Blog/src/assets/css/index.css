@@ -2,3 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
+.Toastify__toast-container {
+  margin-top: 60px; /* Adjust this value as needed */
+}

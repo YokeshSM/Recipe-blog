@@ -41,11 +41,13 @@ import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext";
 import { LogOut } from "lucide-react";
+import { toast } from "react-toastify";
 
 const CookingNavbar = () => {
   const { user, setUser } = useUser();
   const handleLogout = async () => {
     setUser(null);
+    toast("logged out successfully");
   };
   return (
     <nav className="bg-green-600 shadow-md">
