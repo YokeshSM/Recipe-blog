@@ -97,7 +97,7 @@ const RecipePage = () => {
   return (
     <div className="container mx-auto flex flex-col items-center justify-center min-h-screen p-4">
       {/* Centered Search Bar */}
-      <div className="w-full md:w-1/2 mb-6">
+      <div className="w-full md:w-1/2 mb-6 ">
         <input
           type="text"
           placeholder="Search recipes..."
