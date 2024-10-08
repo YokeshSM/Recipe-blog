@@ -13,9 +13,20 @@ const RecipeCard = ({ recipe }) => {
     const [ingredientState,setIngredient]=useState(recipe.ingredients)
     const[methodState,setMethod]=useState(recipe.method)
   
-    const handleLike = () => {
-      setLiked(!liked)
-      setLikes(!liked? likes +1 : likes -1); 
+    const handleLike = (id) => {
+      try {
+        const response = await (id);
+        console.log(response.status);
+        if (response.status === 200) {
+          console.log("Deleted");
+          fetchprojects()
+        }
+        fetchprojects();
+      } catch (error) {
+        window.alert(error);
+        console.log("error");
+      }
+      
     };
   const handleEdit=(e)=>{
     e.preventDefault();
@@ -58,12 +69,12 @@ const RecipeCard = ({ recipe }) => {
           <div className="flex justify-between">
           <div className="flex items-center mt-4">
             <button
-              onClick={handleLike }
+              onClick={()=>{handleLike(id)}}
               className="flex items-center focus:outline-none"
             >
              
              <Heart className={`w-6 h-6 mr-2 ${liked ? 'text-red-500' : 'text-gray-400'}`}/>
-              <span className="text-gray-700">{likes}</span>
+              <span className="text-gray-700">{recipe.like}</span>
             </button>
           </div>
   
