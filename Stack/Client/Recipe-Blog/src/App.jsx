@@ -15,6 +15,9 @@ import "react-toastify/dist/ReactToastify.css";
 // import { UserProvider } from "./context/userContext";
 import { UserProvider } from "./context/UserContext";
 import AddPage from "./pages/AddPage";
+import BreakFast from "./pages/breakFast";
+import BakingGuide from "./pages/BakingGuide";
+import HealthyDinnerRecipes from "./pages/HealthyDinnerRecipes";
 
 function App() {
   return (
@@ -30,6 +33,9 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/addPage" element={<AddPage />} />
+          <Route path="/blogs/10-Easy-breakfast" element={<BreakFast />} />
+          <Route path="/blogs/The-Ultimate-Guide-to-Baking-Perfect-Cookies" element={<BakingGuide />} />
+          <Route path="/blogs/Healthy-Dinner-Recipes-Under-30-Minutes" element={<HealthyDinnerRecipes />} />
         </Routes>
         <Footer />
       </Router>

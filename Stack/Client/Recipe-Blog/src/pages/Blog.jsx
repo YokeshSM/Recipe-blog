@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react'
+import {Link} from 'react-router-dom';
 
 const name="paveen";
 const blogPosts = [
@@ -10,7 +10,7 @@ const blogPosts = [
     image: "https://cdn.prod.website-files.com/64931d2aee18510b47f4bb1f/65c3ce009cf6b1a6c97e7824_Breakfast%20Blog%20Cover-p-800.jpg", // Replace with actual image URL
     description:
       "Start your day off right with these easy and quick breakfast recipes that are perfect for busy mornings. From smoothies to pancakes, we’ve got you covered!",
-      Link:"https://www.allrecipes.com/gallery/10-minute-breakfast-recipes/#:~:text=Streamline%20your%20mornings%20with%20these"
+      Link:"/blogs/10-Easy-breakfast"
     },
     {
       title: "The Ultimate Guide to Baking Perfect Cookies",
@@ -19,7 +19,7 @@ const blogPosts = [
       image: "https://i0.wp.com/wellingtonbakehouse.com/wp-content/uploads/2014/09/stack-final.jpg?resize=708%2C472&ssl=1", // Replace with actual image URL
       description:
       "Learn how to bake the perfect cookies every time with this step-by-step guide. Tips and tricks included for chewy, crispy, or soft cookies.",
-      Link:"https://www.tasteofhome.com/article/cookie-baking-guide/#:~:text=This%20all-inclusive%20guide%20contains#:~:text=This%20all-inclusive%20guide%20contains"
+      Link:"/blogs/The-Ultimate-Guide-to-Baking-Perfect-Cookies"
     },
     {
       title: "Healthy Dinner Recipes Under 30 Minutes",
@@ -28,7 +28,7 @@ const blogPosts = [
       image: "https://laurenzcollins.com/uploads/2023/07/what-are-some-interesting-indian-dinner-recipes-i-can-try.webp", // Replace with actual image URL
       description:
       "Discover a collection of healthy dinner recipes that are not only nutritious but can be prepared in under 30 minutes. Perfect for weeknight meals!",
-      Link:"https://www.eatingwell.com/gallery/7901332/30-minute-dinner-recipes-to-always-make/#:~:text=When%20you%20want%20a%20meal%20that's%20quick%20and"
+      Link:"/blogs/Healthy-Dinner-Recipes-Under-30-Minutes"
       
     },
   // Add more blog posts here...
@@ -49,13 +49,12 @@ const BlogCard = ({ post }) => (
         <p className="text-gray-600 text-sm mb-2">By {post.author} | {post.date}</p>
         <p className="text-gray-700 mb-4">{post.description}</p>
       </div>
-      <a href={post.Link}
-      target='_blank'
+      <Link to={post.Link} 
       className='self-start md:self-end'>
       <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 " >
        Read More
       </button>
-      </a>
+      </Link>
     </div>
   </div>
 );
