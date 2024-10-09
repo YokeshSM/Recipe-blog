@@ -19,14 +19,14 @@ const RecipeCard = ({ recipe ,fetchrecipes}) => {
     const handleLike = async(e) => {
      e.preventDefault();
      setLiked(!liked);
-     var updatedLikes = 0;
+     var updatedLikes =recipe.likes;
      if(!liked)
       {
        updatedLikes= recipe.like + 1;
        setLikes(!likes);
       } 
-      if(!likes){
-        updatedLikes= recipe.like - 1;
+      if(likes && liked){
+        updatedLikes= recipe.like -1;
       }
      setLikes(updatedLikes);
      const recipeData = {
