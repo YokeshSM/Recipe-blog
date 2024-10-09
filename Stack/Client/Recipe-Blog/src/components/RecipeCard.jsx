@@ -7,7 +7,7 @@ import { MdCancel } from "react-icons/md";
 
 const RecipeCard = ({ recipe ,fetchrecipes}) => {
     const [liked, setLiked] = useState(false); 
-    const [likes, setLikes] = useState(0); 
+    const [likes, setLikes] = useState(true); 
     const [visible, setVisible] = useState(false);
     const [nameState,setName]=useState(recipe.name)
     const [imageState,setImagee]=useState(recipe.image)
@@ -19,7 +19,15 @@ const RecipeCard = ({ recipe ,fetchrecipes}) => {
     const handleLike = async(e) => {
      e.preventDefault();
      setLiked(!liked);
-     const updatedLikes = liked ? recipe.like - 1 : recipe.like + 1;
+     var updatedLikes = 0;
+     if(!liked)
+      {
+       updatedLikes= recipe.like + 1;
+       setLikes(!likes);
+      } 
+      if(!likes){
+        updatedLikes= recipe.like - 1;
+      }
      setLikes(updatedLikes);
      const recipeData = {
        like: updatedLikes
