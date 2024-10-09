@@ -10,5 +10,4 @@ const getRecipeId=()=>axios.get(`${SERVER_API}/recipe${id}`)
 const addRecipe=(Recipedata)=>axios.post(`${SERVER_API}recipe/add`,Recipedata)
 const editRecipe=(id,Recipedata)=>axios.put(`${SERVER_API}recipe/edit/${id}`,Recipedata)
 const deleteRecipe=(id)=>axios.delete(`${SERVER_API}recipe/delete/${id}`)
-const addLike=(id,recipeData)=>axios.put(`${SERVER_API}recipe/edit/${id}`,recipeData);
-export { getrecipes,getRecipeId,addRecipe,editRecipe,deleteRecipe ,addLike};
+export { getrecipes,getRecipeId,addRecipe,editRecipe,deleteRecipe };
