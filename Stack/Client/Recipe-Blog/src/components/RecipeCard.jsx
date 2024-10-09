@@ -36,12 +36,23 @@ const RecipeCard = ({ recipe ,fetchrecipes}) => {
         const response=await editRecipe(recipe._id,recipeData)
         console.log(response.status);
         if (response.status === 200) {
+          if(!liked)
+          {
           toast('Liked!', {
             className: 'bg-gradient-to-r from-green-500 to-teal-500 rounded-lg shadow-lg text-white p-3 flex gap-5 text-lg font-bold',
             icon: <Heart />,
           });
           // console.log(fetchrecipes)
-          fetchrecipes(); // Fetch updated recipes after liking
+          fetchrecipes();
+         } // Fetch updated recipes after liking
+         else{
+          toast('UnLiked!', {
+            className: 'bg-gradient-to-r from-green-500 to-teal-500 rounded-lg shadow-lg text-white p-3 flex gap-5 text-lg font-bold',
+            icon: <Heart />,
+          });
+          // console.log(fetchrecipes)
+          fetchrecipes();
+         }
         }
       } catch (error) {
         console.error('Error updating like status:', error.message);
