@@ -32,6 +32,7 @@ const RecipeCard = ({ recipe ,fetchrecipes}) => {
             className: 'bg-gradient-to-r from-green-500 to-teal-500 rounded-lg shadow-lg text-white p-3 flex gap-5 text-lg font-bold',
             icon: <Heart />,
           });
+          // console.log(fetchrecipes)
           fetchrecipes(); // Fetch updated recipes after liking
         }
       } catch (error) {

@@ -35,7 +35,7 @@ console.log(imageRef.current.value)
             "bg-gradient-to-r from-green-500 to-lime-500 rounded-lg shadow-lg text-white p-3 flex gap-5 text-lg font-bold",
           // icon: <Check />,
         });
-        fetchProjects();
+        fetchrecipes();
       }
     } catch (error) {
       console.log(error)

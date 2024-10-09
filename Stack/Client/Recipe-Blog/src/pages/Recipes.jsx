@@ -52,13 +52,13 @@ const RecipePage = () => {
       </div>
       <div className="w-full  flex justify-end">
       
-        <AddComponent fetchrecipes={{fetchrecipes}}/>  
+        <AddComponent fetchrecipes={fetchrecipes}/>  
       </div>
       {/* Recipe Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2   gap-6">       
         {filteredRecipes.length > 0 ? (
           filteredRecipes.map((recipe, index) => (
-            <RecipeCard key={index} recipe={recipe} fetchrecipes={{fetchrecipes}} />
+            <RecipeCard key={index} recipe={recipe} fetchrecipes={fetchrecipes} />
           ))
         ) : (
           <p className="text-gray-500">No recipes found</p>
