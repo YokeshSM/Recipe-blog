@@ -9,6 +9,6 @@ const recipeSchema = new mongoose.Schema({
   like: { type: Number, required: true},
 });
  const recipe =
-  mongoose.model("recipe", recipeSchema);
+  mongoose.model("recipes", recipeSchema);
   export default recipe
 // export default {recipeModel}

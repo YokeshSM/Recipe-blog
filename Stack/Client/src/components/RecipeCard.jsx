@@ -15,6 +15,11 @@ const RecipeCard = ({ recipe ,fetchrecipes}) => {
     const [prepTimeState,setPrepTime]=useState(recipe.prepTime)
     const [ingredientState,setIngredient]=useState(recipe.ingredients)
     const[methodState,setMethod]=useState(recipe.method)
+    useEffect(() => {
+      // Fetch recipes when the component mounts or when fetchrecipes changes
+      fetchrecipes();
+    }, [fetchrecipes]);
+  
   
     const handleLike = async(e) => {
      e.preventDefault();
@@ -108,15 +113,14 @@ const RecipeCard = ({ recipe ,fetchrecipes}) => {
         fetchrecipes()
       }
     } catch (error) {
+      console.log("mistake");
       console.log(error)
       
     }
     setVisible(false)
     // fetchrecipes()
 
-    useEffect(()=>{
-  fetchrecipes();
-    },[])
+   
   }
     return (
       <div className="flex flex-row max-w-full w-full md:w-96 h-auto rounded-lg overflow-hidden shadow-lg p-4 m-4 bg-white">

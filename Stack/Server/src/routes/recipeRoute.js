@@ -1,7 +1,6 @@
 import express from "express";
 import RecipeModel from "../model/recipeModel.js"; // Corrected to RecipeModel
-// const express=require("express")
-// import { listRecipes } from "../controller/recipeController.js";
+
 const recipeRouter = express.Router();
 // const RecipeModel=require("../model/recipeModel")
 
